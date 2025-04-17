@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using TeknologiEksamenApp.Services;
 
 namespace TeknologiEksamenApp
 {
@@ -18,6 +19,8 @@ namespace TeknologiEksamenApp
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            builder.Services.AddSingleton<HttpClient>();
+            builder.Services.AddSingleton<AuthService>();
 
             return builder.Build();
         }

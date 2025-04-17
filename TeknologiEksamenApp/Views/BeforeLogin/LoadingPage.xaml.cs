@@ -7,13 +7,9 @@ public partial class LoadingPage : ContentPage
 		InitializeComponent();
 	}
 
-    protected override void OnAppearing()
+    protected async override void OnAppearing()
     {
         base.OnAppearing();
-        Task.Run(async () =>
-        {
-            await Task.Delay(2000);
-            await Shell.Current.GoToAsync(nameof(OnboardingPage));
-        });
+        await Shell.Current.GoToAsync(nameof(OnboardingPage));
     }
 }

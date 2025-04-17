@@ -1,9 +1,59 @@
+using TeknologiEksamenApp.Services;
+using TeknologiEksamenApp.Utils;
+using TeknologiEksamenApp.Views.AfterLogin;
+
 namespace TeknologiEksamenApp.Views.BeforeLogin;
 
 public partial class SignupPage : ContentPage
 {
-	public SignupPage()
+    private readonly AuthService _authService;
+    public SignupPage(AuthService authService)
 	{
-		InitializeComponent();
+        _authService = authService;
+        InitializeComponent();
 	}
+    private async void BtnSignupClicked(object sender, EventArgs e)
+    {
+        string? email = EntryEmail.Text;
+        string? password = EntryPassword.Text;
+        string? username = EntryUsername.Text;
+
+        if (!InputVerifier.IsValidName(username))
+        {
+            return;
+        }
+
+        if (!InputVerifier.IsValidEmail(email))
+        {
+            return;
+        }
+
+        if (!InputVerifier.IsValidPassword(password))
+        {
+            return;
+        }
+
+        AuthService.AuthResult result = await _authService.SignupAsync(email, password, username);
+
+        if (result.Success)
+        {
+            await Shell.Current.GoToAsync($"../{nameof(MissingVerifactionPage)}");
+        }
+        else
+        {
+            await DisplayAlert("Error", result.ErrorMessage, "OK");
+
+            if (result.NeedsVerifaction)
+            {
+                await Shell.Current.GoToAsync($"../{nameof(MissingVerifactionPage)}");
+            }
+        }
+
+
+    }
+
+    private async void BtnReturnClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("..");
+    }
 }

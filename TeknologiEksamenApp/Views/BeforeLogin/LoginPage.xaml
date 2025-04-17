@@ -3,10 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TeknologiEksamenApp.Views.BeforeLogin.LoginPage"
              Title="LoginPage">
-    <VerticalStackLayout>
+
+    <VerticalStackLayout
+        Padding="50"
+        VerticalOptions="Center">
         <Label 
-            Text="LOGIN"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalTextAlignment="Center"
+            Text="LOGIN"/>
+        <Entry
+            x:Name="EntryEmail"
+            Placeholder="Email"/>
+        <Entry
+            x:Name="EntryPassword"
+            Placeholder="Password"
+            IsPassword="True"/>
+        <Button
+            x:Name="BtnLogin"
+            Text="Login"
+            Clicked="BtnLoginClicked"/>
+        <Button
+            x:Name="BtnReturn"
+            Text="Return"
+            Clicked="BtnReturnClicked"/>
     </VerticalStackLayout>
 </ContentPage>

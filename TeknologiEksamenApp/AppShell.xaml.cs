@@ -1,4 +1,5 @@
 ﻿using TeknologiEksamenApp.Views.BeforeLogin;
+using TeknologiEksamenApp.Views.AfterLogin;
 
 namespace TeknologiEksamenApp;
 
@@ -12,6 +13,8 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(SignupPage), typeof(SignupPage));
         Routing.RegisterRoute(nameof(OnboardingPage), typeof(OnboardingPage));
         Routing.RegisterRoute(nameof(MissingVerifactionPage), typeof(MissingVerifactionPage));
+        
+        Routing.RegisterRoute(nameof(AccountPage), typeof(AccountPage));
 
         CurrentItem = new ShellContent
         {

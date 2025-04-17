@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TeknologiEksamenApp.Views.BeforeLogin.OnboardingPage"
              Title="OnboardingPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout
+        Padding="50"
+        VerticalOptions="Center">
         <Label 
-            Text="SpendOff"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalTextAlignment="Center"
+            Text="SpendOff"/>
         <Button
             Clicked="BtnLoginClicked"
             Text="Login"/>

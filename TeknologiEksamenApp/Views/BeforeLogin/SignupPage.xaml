@@ -3,10 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TeknologiEksamenApp.Views.BeforeLogin.SignupPage"
              Title="SignupPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout
+        Padding="50"
+        VerticalOptions="Center">
         <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalTextAlignment="Center"
+            Text="SIGNUP"/>
+        <Entry
+            x:Name="EntryUsername"
+            Placeholder="Username"/>
+        <Entry
+            x:Name="EntryEmail"
+            Placeholder="Email"/>
+        <Entry
+            x:Name="EntryPassword"
+            Placeholder="Password"
+            IsPassword="True"/>
+        <Button
+            x:Name="BtnSignup"
+            Text="Signup"
+            Clicked="BtnSignupClicked"/>
+        <Button
+            x:Name="BtnReturn"
+            Text="Return"
+            Clicked="BtnReturnClicked"/>
     </VerticalStackLayout>
 </ContentPage>

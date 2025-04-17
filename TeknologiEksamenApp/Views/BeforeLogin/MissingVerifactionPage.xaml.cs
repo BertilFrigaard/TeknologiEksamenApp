@@ -6,4 +6,9 @@ public partial class MissingVerifactionPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void BtnReturnClicked(object sender, EventArgs e)
+    {
+		Shell.Current.GoToAsync("..");
+    }
 }
