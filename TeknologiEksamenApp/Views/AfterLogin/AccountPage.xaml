@@ -3,10 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TeknologiEksamenApp.Views.AfterLogin.AccountPage"
              Title="AccountPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout
+        Padding="50"
+        VerticalOptions="Center">
         <Label 
-            Text="Welcome to .NET MAUI!"
+            x:Name="LabelUsername"
+            Text="LOADING USER"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Button
+            x:Name="BtnLogout"
+            Clicked="BtnLogoutClicked"
+            Text="Logout!"/>
     </VerticalStackLayout>
 </ContentPage>

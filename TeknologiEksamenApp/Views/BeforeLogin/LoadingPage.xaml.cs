@@ -1,15 +1,32 @@
+using TeknologiEksamenApp.Services;
+using TeknologiEksamenApp.Views.AfterLogin;
+
 namespace TeknologiEksamenApp.Views.BeforeLogin;
 
 public partial class LoadingPage : ContentPage
 {
-	public LoadingPage()
+    private readonly AuthService _authService;
+	public LoadingPage(AuthService authService)
 	{
-		InitializeComponent();
+        _authService = authService;
+        InitializeComponent();
 	}
 
-    protected async override void OnAppearing()
+    protected override void OnAppearing()
     {
         base.OnAppearing();
-        await Shell.Current.GoToAsync(nameof(OnboardingPage));
+        CheckSession();
+    }
+
+    private async void CheckSession()
+    {
+        if (await _authService.HasSavedSession())
+        {
+            await Shell.Current.GoToAsync(nameof(AccountPage));
+        }
+        else
+        {
+            await Shell.Current.GoToAsync(nameof(OnboardingPage));
+        }
     }
 }
