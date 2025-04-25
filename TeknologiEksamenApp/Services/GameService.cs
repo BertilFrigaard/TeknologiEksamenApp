@@ -10,6 +10,7 @@ public class GameService
     private const string CREATE_GAME_ENDPOINT = "games/createGame";
     private const string GET_GAME_ENDPOINT = "games/getGameById";
     private const string JOIN_GAME_ENDPOINT = "games/joinGame";
+    private const string ADD_EXPENSE_ENDPOINT = "games/addEntry";
 
     private readonly AuthService _authService;
     public GameService(AuthService authService)
@@ -158,4 +159,29 @@ public class GameService
                 return new GameIdResponse { Success = false, ErrorMessage = "Something went wrong! Try again later." };
         }
     }
+
+    public async Task<GameIdResponse> AddExpenseAsync(string gameId, float amount)
+    {
+        var requestData = new { gameId, amount };
+        var requestContent = new StringContent(JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json");
+        HttpResponseMessage response = await _authService.PostAuthenticatedAsync($"{BASE_URL}/{ADD_EXPENSE_ENDPOINT}", requestContent);
+        switch (response.StatusCode)
+        {
+            case System.Net.HttpStatusCode.Unauthorized:
+                return new GameIdResponse { Success = false, NeedsLogin = true, ErrorMessage = "Session expired" };
+
+            case System.Net.HttpStatusCode.OK:
+                return new GameIdResponse { Success = true, GameId = gameId };
+
+            case System.Net.HttpStatusCode.Forbidden:
+                return new GameIdResponse { Success = false, ErrorMessage = "You are not a part of this game" };
+
+            case System.Net.HttpStatusCode.RequestEntityTooLarge:
+                return new GameIdResponse { Success = false, ErrorMessage = "Amount too large" };
+
+            default:
+                return new GameIdResponse { Success = false, ErrorMessage = "Something went wrong! Try again later." };
+        }
+    }
 }
+

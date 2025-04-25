@@ -9,7 +9,7 @@ public class UserService
 
     private readonly AuthService _authService;
 
-    private User? ActiveUser = null;
+    public User? ActiveUser { get; private set; } = null;
 
     public class UserResponse
     {
