@@ -22,6 +22,7 @@ namespace TeknologiEksamenApp
             builder.Services.AddSingleton<HttpClient>();
             builder.Services.AddSingleton<AuthService>();
             builder.Services.AddSingleton<UserService>();
+            builder.Services.AddSingleton<GameService>();
 
             return builder.Build();
         }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TeknologiEksamenApp.Views.AfterLogin.CreateGamePage"
+             Title="CreateGamePage">
+    <VerticalStackLayout
+        Padding="50"
+        VerticalOptions="Center">
+        <Label 
+            HorizontalTextAlignment="Center"
+            Text="Create Game"/>
+        <Entry
+            x:Name="EntryName"
+            Placeholder="Game Name"/>
+        <Entry
+            x:Name="EntryBudget"
+            Placeholder="Budget"/>
+        <Entry
+            x:Name="EntryPassword"
+            Placeholder="Game Password (Optional)"
+            IsPassword="True"/>
+        <Button
+            x:Name="BtnCreate"
+            Text="Create"
+            Clicked="BtnCreateClicked"/>
+        <Button
+            x:Name="BtnReturn"
+            Text="Return"
+            Clicked="BtnReturnClicked"/>
+    </VerticalStackLayout>
+</ContentPage>

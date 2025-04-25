@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TeknologiEksamenApp.Views.AfterLogin.ViewGamePage"
+             Title="ViewGamePage">
+    <VerticalStackLayout
+        Padding="50"
+        Spacing="20">
+        <Border
+            HeightRequest="200"
+            WidthRequest="{Binding Source={x:Reference CollectionGameCards}, Path=Width}"
+            Padding="20"
+            BackgroundColor="Yellow">
+            <Label
+                x:Name="LabelGameName"
+                Text="Loading Game Name"
+                HorizontalOptions="Center"
+                FontSize="20"
+                TextDecorations="Underline"/>
+        </Border>
+
+        <CollectionView
+            MaximumHeightRequest="500"
+            x:Name="CollectionPlayerCards"
+            SelectionMode="Single"
+            SelectionChanged="CollectionPlayerCardsSelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        HeightRequest="50"
+                        WidthRequest="{Binding Source={x:Reference CollectionPlayerCards}, Path=Width}"
+                        Padding="20, 0"
+                        BackgroundColor="Yellow">
+                        <HorizontalStackLayout>
+                            <Label 
+                                Text="{Binding Name}"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"
+                                FontSize="20"
+                                Padding="0, 0, 50, 0"/>
+
+                            <Label 
+                                Text="{Binding MoneyLeft}"
+                                VerticalOptions="Center"
+                                FontSize="20"/>
+                            <Label 
+                                Text=" DKK"
+                                VerticalOptions="Center"
+                                FontSize="20"/>
+                        </HorizontalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Label
+            x:Name="LabelJoinCode"
+            Text="Loading Join Code"
+            FontSize="20"/>
+        <Button
+            x:Name="BtnReturn"
+            Text="Return"
+            Clicked="BtnReturnClicked"/>
+
+    </VerticalStackLayout>
+</ContentPage>

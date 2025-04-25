@@ -15,6 +15,10 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(MissingVerifactionPage), typeof(MissingVerifactionPage));
         
         Routing.RegisterRoute(nameof(AccountPage), typeof(AccountPage));
+        Routing.RegisterRoute(nameof(AddExpensePage), typeof(AddExpensePage));
+        Routing.RegisterRoute(nameof(JoinGamePage), typeof(JoinGamePage));
+        Routing.RegisterRoute(nameof(CreateGamePage), typeof(CreateGamePage));
+        Routing.RegisterRoute(nameof(ViewGamePage), typeof(ViewGamePage));
 
         CurrentItem = new ShellContent
         {

@@ -34,4 +34,21 @@ public static class InputVerifier
         // TODO: Implement regex to check for invalid characters in name
         return true;
     }
+
+    public static bool IsValidAmount(string? amount)
+    {
+        if (string.IsNullOrEmpty(amount))
+        {
+            return false;
+        }
+        try
+        {
+            float.Parse(amount);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }
