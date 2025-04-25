@@ -9,6 +9,7 @@ public class GameService
     private const string BASE_URL = "http://10.0.2.2:3000";
     private const string CREATE_GAME_ENDPOINT = "games/createGame";
     private const string GET_GAME_ENDPOINT = "games/getGameById";
+    private const string JOIN_GAME_ENDPOINT = "games/joinGame";
 
     private readonly AuthService _authService;
     public GameService(AuthService authService)
@@ -132,6 +133,29 @@ public class GameService
             default:
                 return new GameResponse { Success = false, ErrorMessage = "Something went wrong! Try again later." };
 
+        }
+    }
+
+    public async Task<GameIdResponse> JoinGameAsync(string joinCode, string? password = null)
+    {
+        var requestData = new { joinCode, password };
+        var requestContent = new StringContent(JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json");
+        HttpResponseMessage response = await _authService.PostAuthenticatedAsync($"{BASE_URL}/{JOIN_GAME_ENDPOINT}", requestContent);
+        switch (response.StatusCode)
+        {
+            case System.Net.HttpStatusCode.Unauthorized:
+                return new GameIdResponse { Success = false, NeedsLogin = true, ErrorMessage = "Session expired" };
+            case System.Net.HttpStatusCode.OK:
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var responseJson = JsonSerializer.Deserialize<JsonElement>(responseContent);
+                string? gameId = responseJson.GetProperty("gameId").GetString()!;
+                return new GameIdResponse { Success = true, GameId = gameId };
+            case System.Net.HttpStatusCode.Forbidden:
+                return new GameIdResponse { Success = false, ErrorMessage = (password == null ? "Game is password locked" : "Incorrect password") };
+            case System.Net.HttpStatusCode.NotFound:
+                return new GameIdResponse { Success = false, ErrorMessage = "Game not found" };
+            default:
+                return new GameIdResponse { Success = false, ErrorMessage = "Something went wrong! Try again later." };
         }
     }
 }

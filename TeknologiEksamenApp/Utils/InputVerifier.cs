@@ -51,4 +51,9 @@ public static class InputVerifier
             return false;
         }
     }
+
+    public static bool IsValidJoinCode(string? joinCode)
+    {
+        return string.IsNullOrEmpty(joinCode) == false && joinCode.Length == 6;
+    }
 }
