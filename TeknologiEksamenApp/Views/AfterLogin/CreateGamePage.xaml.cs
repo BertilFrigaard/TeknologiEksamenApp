@@ -17,6 +17,7 @@ public partial class CreateGamePage : ContentPage
         string? gameName = EntryName.Text;
         string? gamePassword = EntryPassword.Text;
         string? budget = EntryBudget.Text;
+        string? period = EntryPeriod.Text;
 
         if (!InputVerifier.IsValidName(gameName))
         {
@@ -33,8 +34,22 @@ public partial class CreateGamePage : ContentPage
             return;
         }
 
-        GameService.GameIdResponse res = await _gameService.CreateGameAsync(gameName, float.Parse(budget), gamePassword);
-        await Shell.Current.GoToAsync($"../{nameof(ViewGamePage)}?id={res.GameId}");
+        if (!InputVerifier.IsValidPeriod(period))
+        {
+            return;
+        }
+
+        int periodMinutes = (int)Math.Floor(float.Parse(period)) * 24 * 60;
+
+        GameService.GameIdResponse res = await _gameService.CreateGameAsync(gameName, float.Parse(budget), periodMinutes, gamePassword);
+        if (res.Success)
+        {
+            await Shell.Current.GoToAsync($"../{nameof(ViewGamePage)}?id={res.GameId}");
+        }
+        else
+        {
+            await DisplayAlert("ERROR", res.ErrorMessage, "OK");
+        }
     }
     private async void BtnReturnClicked(object sender, EventArgs e)
     {

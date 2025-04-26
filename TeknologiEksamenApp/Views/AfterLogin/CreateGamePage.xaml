@@ -11,13 +11,16 @@
             Text="Create Game"/>
         <Entry
             x:Name="EntryName"
-            Placeholder="Game Name"/>
+            Placeholder="Game name"/>
         <Entry
             x:Name="EntryBudget"
             Placeholder="Budget"/>
         <Entry
+            x:Name="EntryPeriod"
+            Placeholder="Game period in days"/>
+        <Entry
             x:Name="EntryPassword"
-            Placeholder="Game Password (Optional)"
+            Placeholder="Game password (Optional)"
             IsPassword="True"/>
         <Button
             x:Name="BtnCreate"

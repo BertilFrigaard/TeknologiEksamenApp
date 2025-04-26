@@ -52,6 +52,23 @@ public static class InputVerifier
         }
     }
 
+    public static bool IsValidPeriod(string? period)
+    {
+        if (string.IsNullOrEmpty(period))
+        {
+            return false;
+        }
+        try
+        {
+            int days = (int) Math.Floor(float.Parse(period));
+            return days <= 360 && days > 0;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
     public static bool IsValidJoinCode(string? joinCode)
     {
         return string.IsNullOrEmpty(joinCode) == false && joinCode.Length == 6;

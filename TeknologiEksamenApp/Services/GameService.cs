@@ -11,6 +11,9 @@ public class GameService
     private const string GET_GAME_ENDPOINT = "games/getGameById";
     private const string JOIN_GAME_ENDPOINT = "games/joinGame";
     private const string ADD_EXPENSE_ENDPOINT = "games/addEntry";
+    private const string LEAVE_GAME_ENDPOINT = "games/leaveGame";
+    private const string DELETE_GAME_ENDPOINT = "games/deleteGame";
+    private const string KICK_PLAYER_ENDPOINT = "games/kick";
 
     private readonly AuthService _authService;
     public GameService(AuthService authService)
@@ -59,6 +62,23 @@ public class GameService
 
         [JsonPropertyName("budget")]
         public required float Budget {  get; set; }
+
+        public Dictionary<string, float> GetTotalExpenses()
+        {
+            Dictionary<string, float> totaledPlayerExpenses = new();
+
+            foreach (GamePlayer player in GamePlayers)
+            {
+                float sum = 0;
+                foreach (GameEntry entry in player.Entries)
+                {
+                    sum += entry.Amount;
+                }
+                totaledPlayerExpenses.Add(player.PlayerId, sum);
+            }
+
+            return totaledPlayerExpenses;
+        }
     }
 
     public class GamePlayer
@@ -79,9 +99,9 @@ public class GameService
         public required float Amount { get; set; }
     }
 
-    public async Task<GameIdResponse> CreateGameAsync(string gameName, float budget, string? password = null)
+    public async Task<GameIdResponse> CreateGameAsync(string gameName, float budget, int period, string? password = null)
     {
-        var requestData = new { gameName, budget, password };
+        var requestData = new { gameName, budget, period, password };
         var requestContent = new StringContent(JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json");
         
         HttpResponseMessage response = await _authService.PostAuthenticatedAsync($"{BASE_URL}/{CREATE_GAME_ENDPOINT}", requestContent);
@@ -178,6 +198,78 @@ public class GameService
 
             case System.Net.HttpStatusCode.RequestEntityTooLarge:
                 return new GameIdResponse { Success = false, ErrorMessage = "Amount too large" };
+
+            default:
+                return new GameIdResponse { Success = false, ErrorMessage = "Something went wrong! Try again later." };
+        }
+    }
+
+    public async Task<GameIdResponse> LeaveGameAsync(string gameId)
+    {
+        var requestData = new { gameId };
+        var requestContent = new StringContent(JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json");
+        HttpResponseMessage response = await _authService.DeleteAuthenticatedAsync($"{BASE_URL}/{LEAVE_GAME_ENDPOINT}/{gameId}");
+        switch (response.StatusCode)
+        {
+            case System.Net.HttpStatusCode.Unauthorized:
+                return new GameIdResponse { Success = false, NeedsLogin = true, ErrorMessage = "Session expired" };
+
+            case System.Net.HttpStatusCode.NotFound:
+                return new GameIdResponse { Success = false, ErrorMessage = "Game not found" };
+
+            case System.Net.HttpStatusCode.Forbidden:
+                return new GameIdResponse { Success = false, ErrorMessage = "You can't perform this operation" };
+
+            case System.Net.HttpStatusCode.OK:
+                return new GameIdResponse { Success = true, GameId = gameId };
+
+            default:
+                return new GameIdResponse { Success = false, ErrorMessage = "Something went wrong! Try again later." };
+        }
+    }
+
+    public async Task<GameIdResponse> DeleteGameAsync(string gameId)
+    {
+        var requestData = new { gameId };
+        var requestContent = new StringContent(JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json");
+        HttpResponseMessage response = await _authService.DeleteAuthenticatedAsync($"{BASE_URL}/{DELETE_GAME_ENDPOINT}/{gameId}");
+        switch (response.StatusCode)
+        {
+            case System.Net.HttpStatusCode.Unauthorized:
+                return new GameIdResponse { Success = false, NeedsLogin = true, ErrorMessage = "Session expired" };
+
+            case System.Net.HttpStatusCode.NotFound:
+                return new GameIdResponse { Success = false, ErrorMessage = "Game not found" };
+
+            case System.Net.HttpStatusCode.Forbidden:
+                return new GameIdResponse { Success = false, ErrorMessage = "You can't perform this operation" };
+
+            case System.Net.HttpStatusCode.OK:
+                return new GameIdResponse { Success = true, GameId = gameId };
+
+            default:
+                return new GameIdResponse { Success = false, ErrorMessage = "Something went wrong! Try again later." };
+        }
+    }
+
+    public async Task<GameIdResponse> KickFromGameAsync(string targetId, string gameId)
+    {
+        var requestData = new { gameId, targetId };
+        var requestContent = new StringContent(JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json");
+        HttpResponseMessage response = await _authService.PostAuthenticatedAsync($"{BASE_URL}/{KICK_PLAYER_ENDPOINT}", requestContent);
+        switch (response.StatusCode)
+        {
+            case System.Net.HttpStatusCode.Unauthorized:
+                return new GameIdResponse { Success = false, NeedsLogin = true, ErrorMessage = "Session expired" };
+
+            case System.Net.HttpStatusCode.OK:
+                return new GameIdResponse { Success = true, GameId = gameId };
+
+            case System.Net.HttpStatusCode.Forbidden:
+                return new GameIdResponse { Success = false, ErrorMessage = "You cannot perform this operation" };
+
+            case System.Net.HttpStatusCode.NotFound:
+                return new GameIdResponse { Success = false, ErrorMessage = "Game not found" };
 
             default:
                 return new GameIdResponse { Success = false, ErrorMessage = "Something went wrong! Try again later." };

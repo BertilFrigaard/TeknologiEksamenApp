@@ -6,17 +6,24 @@
     <VerticalStackLayout
         Padding="50"
         Spacing="20">
+        <Label
+            x:Name="LabelGameName"
+            Text="Loading Game Name"
+            HorizontalOptions="Center"
+            FontSize="20"
+            TextDecorations="Underline"/>
+
+        <Label
+            x:Name="LabelTimeLeft"
+            Text="Loading Days Left"
+            HorizontalOptions="Center"
+            FontSize="20" />
+        
         <Border
             HeightRequest="200"
             WidthRequest="{Binding Source={x:Reference CollectionGameCards}, Path=Width}"
             Padding="20"
             BackgroundColor="Yellow">
-            <Label
-                x:Name="LabelGameName"
-                Text="Loading Game Name"
-                HorizontalOptions="Center"
-                FontSize="20"
-                TextDecorations="Underline"/>
         </Border>
 
         <CollectionView
@@ -53,9 +60,19 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
         <Label
+            x:Name="LabelBudget"
+            Text="Loading Budget"
+            FontSize="20"/>
+        <Label
             x:Name="LabelJoinCode"
             Text="Loading Join Code"
             FontSize="20"/>
+        
+        <Button
+            x:Name="BtnQuit"
+            Text="Loading Option"
+            Clicked="BtnQuitClicked"/>
+        
         <Button
             x:Name="BtnReturn"
             Text="Return"

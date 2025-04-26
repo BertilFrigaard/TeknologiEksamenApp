@@ -19,7 +19,7 @@
             TextDecorations="Underline"/>
 
         <CollectionView
-            MaximumHeightRequest="500"
+            MaximumHeightRequest="300"
             x:Name="CollectionGameCards"
             SelectionMode="Single"
             SelectionChanged="CollectionGameCardsSelectionChanged">
