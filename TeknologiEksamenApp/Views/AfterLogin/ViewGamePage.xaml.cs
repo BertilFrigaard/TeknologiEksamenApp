@@ -1,4 +1,5 @@
 
+using LiveChartsCore.SkiaSharpView;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using TeknologiEksamenApp.Services;
@@ -51,12 +52,16 @@ public partial class ViewGamePage : ContentPage, IQueryAttributable
             {
                 LabelTimeLeft.Text = $"{(int) timeDiff.TotalHours} hours left";
             }
-            else
+            else if (timeDiff.TotalMinutes >= 1)
             {
                 LabelTimeLeft.Text = $"{(int) timeDiff.TotalMinutes} minutes left";
             }
+            else
+            {
+                LabelTimeLeft.Text = "SPILLET ER SLUT!";
+            }
 
-            LabelBudget.Text = $"Budget: {game.Budget} DKK";
+                LabelBudget.Text = $"Budget: {game.Budget} DKK";
             LabelJoinCode.Text = $"Join Code: {game.JoinCode}";
 
             if (game.AdminId.Equals(_userSerivce.ActiveUser?.ID))
@@ -78,6 +83,7 @@ public partial class ViewGamePage : ContentPage, IQueryAttributable
         {
             await DisplayAlert("Error", response.ErrorMessage, "OK");
         }
+
     }
 
     private async Task LoadAllPlayerCards(GameService.Game game, ObservableCollection<PlayerCard> cards)

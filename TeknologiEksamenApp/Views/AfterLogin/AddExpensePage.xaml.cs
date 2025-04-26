@@ -43,6 +43,16 @@ public partial class AddExpensePage : ContentPage
         GameService.GameResponse response = await _gameService.GetGameAsync(gameId);
         if (response.Success)
         {
+            var dateNow = DateTime.Now;
+            var dateEnd = response.Game.Created.AddMinutes(response.Game.PeriodMinutes);
+
+            var timeDiff = dateEnd - dateNow;
+
+            if (timeDiff.TotalMinutes <= 0)
+            {
+                return;
+            }
+
             options.Add(response.Game.Name);
             gameIds.Add(response.Game.Id);
         }

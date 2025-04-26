@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using LiveChartsCore.SkiaSharpView.Maui;
+using Microsoft.Extensions.Logging;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 using TeknologiEksamenApp.Services;
 
 namespace TeknologiEksamenApp
@@ -9,6 +11,8 @@ namespace TeknologiEksamenApp
         {
             var builder = MauiApp.CreateBuilder();
             builder
+                .UseSkiaSharp()
+                .UseLiveCharts()
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
