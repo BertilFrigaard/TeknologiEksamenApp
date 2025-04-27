@@ -134,19 +134,26 @@ public partial class ViewGamePage : ContentPage, IQueryAttributable
     }
 
     private async void CollectionPlayerCardsSelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
+    {   
+        var item = e.CurrentSelection.FirstOrDefault() as PlayerCard;
+    
+        CollectionPlayerCards.SelectedItem = null;
+
+        if (item == null)
+            return;
+
         var user = _userSerivce.ActiveUser;
         if (game.AdminId.Equals(user.ID))
         {
-            var answer = await DisplayActionSheet($"KICK {((PlayerCard)CollectionPlayerCards.SelectedItem).Name}", "NO", "YES");
+            var answer = await DisplayActionSheet($"KICK {item.Name}", "NO", "YES");
             if (answer != "YES")
             {
                 return;
             }
-            GameService.GameIdResponse res = await _gameService.KickFromGameAsync(((PlayerCard)CollectionPlayerCards.SelectedItem).ID, game.Id);
+            GameService.GameIdResponse res = await _gameService.KickFromGameAsync(item.ID, game.Id);
             if (res.Success)
             {
-                await DisplayAlert("KICKED", $"You kicked {((PlayerCard)CollectionPlayerCards.SelectedItem).Name}", "OK");
+                await DisplayAlert("KICKED", $"You kicked {item.Name}", "OK");
                 await Shell.Current.GoToAsync("..");
             }
             else
@@ -156,6 +163,7 @@ public partial class ViewGamePage : ContentPage, IQueryAttributable
             }
         }
     }
+
 
     private async void BtnQuitClicked(object sender, EventArgs e)
     {

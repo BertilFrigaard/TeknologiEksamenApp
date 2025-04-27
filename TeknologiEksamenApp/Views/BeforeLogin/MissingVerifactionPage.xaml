@@ -4,13 +4,18 @@
              x:Class="TeknologiEksamenApp.Views.BeforeLogin.MissingVerifactionPage"
              Title="MissingVerifactionPage">
     <VerticalStackLayout
-        Padding="50"
-        VerticalOptions="Center">
-        <Label 
-            Text="Missing verifiaction! Check your email"
-            HorizontalTextAlignment="Center"/>
+        Style="{StaticResource UsualStack}">
+        <VerticalStackLayout>
+            <Label 
+                Style="{StaticResource LabelTitle2}"
+                Text="Missing Verifiaction"/>
+            <Label 
+                Style="{StaticResource LabelTitle2}"
+                Text="Check your email!"/>
+        </VerticalStackLayout>
         <Button
             x:Name="BtnReturn"
+            Style="{StaticResource ButtonPrimary}"
             Text="I have verified"
             Clicked="BtnReturnClicked"/>
     </VerticalStackLayout>

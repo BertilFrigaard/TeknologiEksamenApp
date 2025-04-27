@@ -5,10 +5,9 @@
              Title="LoginPage">
 
     <VerticalStackLayout
-        Padding="50"
-        VerticalOptions="Center">
+        Style="{StaticResource UsualStack}">
         <Label 
-            HorizontalTextAlignment="Center"
+            Style="{StaticResource LabelTitle2}"
             Text="LOGIN"/>
         <Entry
             x:Name="EntryEmail"
@@ -19,10 +18,12 @@
             IsPassword="True"/>
         <Button
             x:Name="BtnLogin"
+            Style="{StaticResource ButtonPrimary}"
             Text="Login"
             Clicked="BtnLoginClicked"/>
         <Button
             x:Name="BtnReturn"
+            Style="{StaticResource ButtonSecondary}"
             Text="Return"
             Clicked="BtnReturnClicked"/>
     </VerticalStackLayout>

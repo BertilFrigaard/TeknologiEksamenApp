@@ -4,10 +4,9 @@
              x:Class="TeknologiEksamenApp.Views.AfterLogin.AddExpensePage"
              Title="AddExpensePage">
     <VerticalStackLayout
-        Padding="50"
-        VerticalOptions="Center">
+        Style="{StaticResource UsualStack}">
         <Label 
-            HorizontalTextAlignment="Center"
+            Style="{StaticResource LabelTitle2}"
             Text="Add Expense"/>
         <Picker
             x:Name="PickerGame"
@@ -17,10 +16,12 @@
             Placeholder="Amount"/>
         <Button
             x:Name="BtnAdd"
+            Style="{StaticResource ButtonPrimary}"
             Text="Add"
             Clicked="BtnAddClicked"/>
         <Button
             x:Name="BtnReturn"
+            Style="{StaticResource ButtonSecondary}"
             Text="Return"
             Clicked="BtnReturnClicked"/>
     </VerticalStackLayout>

@@ -4,10 +4,9 @@
              x:Class="TeknologiEksamenApp.Views.AfterLogin.JoinGamePage"
              Title="JoinGamePage">
     <VerticalStackLayout
-        Padding="50"
-        VerticalOptions="Center">
+        Style="{StaticResource UsualStack}">
         <Label 
-            HorizontalTextAlignment="Center"
+            Style="{StaticResource LabelTitle2}"
             Text="Join Game"/>
         <Entry
             x:Name="EntryJoinCode"
@@ -18,10 +17,12 @@
             IsPassword="True"/>
         <Button
             x:Name="BtnJoin"
+            Style="{StaticResource ButtonPrimary}"
             Text="Join"
             Clicked="BtnJoinClicked"/>
         <Button
             x:Name="BtnReturn"
+            Style="{StaticResource ButtonSecondary}"
             Text="Return"
             Clicked="BtnReturnClicked"/>
     </VerticalStackLayout>

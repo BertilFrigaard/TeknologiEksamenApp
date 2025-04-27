@@ -141,6 +141,7 @@ public partial class AccountPage : ContentPage
     private void CollectionGameCardsSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
 		var selection = e.CurrentSelection;
+		CollectionGameCards.SelectedItem = null; 
 		if (selection.Count < 1)
 		{
 			return;

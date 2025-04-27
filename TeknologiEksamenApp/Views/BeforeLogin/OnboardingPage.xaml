@@ -4,15 +4,16 @@
              x:Class="TeknologiEksamenApp.Views.BeforeLogin.OnboardingPage"
              Title="OnboardingPage">
     <VerticalStackLayout
-        Padding="50"
-        VerticalOptions="Center">
+        Style="{StaticResource UsualStack}">
         <Label 
-            HorizontalTextAlignment="Center"
-            Text="SpendOff"/>
+            Style="{StaticResource LabelTitle}"
+            Text="Spend Off"/>
         <Button
+            Style="{StaticResource ButtonPrimary}"
             Clicked="BtnLoginClicked"
             Text="Login"/>
         <Button
+            Style="{StaticResource ButtonSecondary}"
             Clicked="BtnSignupClicked"
             Text="Signup"/>
     </VerticalStackLayout>

@@ -4,6 +4,65 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <Style TargetType="VerticalStackLayout" x:Key="StackBase">
+        <Setter Property="Spacing" Value="20"/>
+        <Setter Property="Padding" Value="50"/>
+    </Style>
+
+    <Style TargetType="VerticalStackLayout" x:Key="UsualStack" BasedOn="{StaticResource StackBase}">
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style TargetType="VerticalStackLayout" x:Key="TopStack" BasedOn="{StaticResource StackBase}">
+        <Setter Property="VerticalOptions" Value="Start"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelBase">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelTitle" BasedOn="{StaticResource LabelBase}">
+        <Setter Property="FontSize" Value="40"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelTitle2" BasedOn="{StaticResource LabelBase}">
+        <Setter Property="FontSize" Value="30"/>
+    </Style>
+
+    <Style TargetType="Button" x:Key="ButtonBase">
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+    <Style TargetType="Button" x:Key="ButtonPrimary" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+        <Setter Property="TextColor" Value="{StaticResource White}"/>
+    </Style>
+    
+    <Style TargetType="Button" x:Key="ButtonSecondary" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+        <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+    </Style>
+
+    <Style TargetType="Button" x:Key="ButtonSmall" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+        <Setter Property="TextColor" Value="{StaticResource White}"/>
+        <Setter Property="BorderColor" Value="{StaticResource White}"/>
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="FontSize" Value="18"/>
+
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="Padding" Value="10, 5"/>
+        <Setter Property="CornerRadius" Value="50"/>
+    </Style>
+    
+
+    <!--
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
     </Style>
@@ -393,7 +452,6 @@
         </Setter>
     </Style>
   
-    <!--
     <Style TargetType="TitleBar">
         <Setter Property="MinimumHeightRequest" Value="32"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
@@ -415,7 +473,6 @@
             </VisualStateGroupList>
         </Setter>
     </Style>
-    -->
 
     <Style TargetType="Page" ApplyToDerivedTypes="True">
         <Setter Property="Padding" Value="0"/>
@@ -447,5 +504,6 @@
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
+    -->
 
 </ResourceDictionary>

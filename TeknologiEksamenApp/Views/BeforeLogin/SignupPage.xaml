@@ -4,10 +4,9 @@
              x:Class="TeknologiEksamenApp.Views.BeforeLogin.SignupPage"
              Title="SignupPage">
     <VerticalStackLayout
-        Padding="50"
-        VerticalOptions="Center">
+        Style="{StaticResource UsualStack}">
         <Label 
-            HorizontalTextAlignment="Center"
+            Style="{StaticResource LabelTitle2}"
             Text="SIGNUP"/>
         <Entry
             x:Name="EntryUsername"
@@ -21,10 +20,12 @@
             IsPassword="True"/>
         <Button
             x:Name="BtnSignup"
+            Style="{StaticResource ButtonPrimary}"
             Text="Signup"
             Clicked="BtnSignupClicked"/>
         <Button
             x:Name="BtnReturn"
+            Style="{StaticResource ButtonSecondary}"
             Text="Return"
             Clicked="BtnReturnClicked"/>
     </VerticalStackLayout>

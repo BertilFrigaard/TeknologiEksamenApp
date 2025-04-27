@@ -4,10 +4,9 @@
              x:Class="TeknologiEksamenApp.Views.AfterLogin.CreateGamePage"
              Title="CreateGamePage">
     <VerticalStackLayout
-        Padding="50"
-        VerticalOptions="Center">
+        Style="{StaticResource UsualStack}">
         <Label 
-            HorizontalTextAlignment="Center"
+            Style="{StaticResource LabelTitle2}"
             Text="Create Game"/>
         <Entry
             x:Name="EntryName"
@@ -24,10 +23,12 @@
             IsPassword="True"/>
         <Button
             x:Name="BtnCreate"
+            Style="{StaticResource ButtonPrimary}"
             Text="Create"
             Clicked="BtnCreateClicked"/>
         <Button
             x:Name="BtnReturn"
+            Style="{StaticResource ButtonSecondary}"
             Text="Return"
             Clicked="BtnReturnClicked"/>
     </VerticalStackLayout>

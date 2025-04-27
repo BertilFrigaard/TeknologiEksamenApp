@@ -5,29 +5,31 @@
              x:Class="TeknologiEksamenApp.Views.AfterLogin.ViewGamePage"
              Title="ViewGamePage">
     <VerticalStackLayout
-        Padding="50"
-        Spacing="20">
+        Style="{StaticResource TopStack}">
+        
         <Label
             x:Name="LabelGameName"
-            Text="Loading Game Name"
-            HorizontalOptions="Center"
-            FontSize="20"
-            TextDecorations="Underline"/>
+            Style="{StaticResource LabelTitle2}"
+            Text="Loading Game Name"/>
 
         <Label
             x:Name="LabelTimeLeft"
             Text="Loading Days Left"
             HorizontalOptions="Center"
+            FontAttributes="Italic"
             FontSize="20" />
-        
+
         <Border
             HeightRequest="200"
             WidthRequest="{Binding Source={x:Reference CollectionGameCards}, Path=Width}"
             Padding="20"
-            BackgroundColor="Yellow">
-            <lvc:CartesianChart
-                x:Name="ChartGame">
-            </lvc:CartesianChart>
+            Stroke="{StaticResource Primary}">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10"/>
+            </Border.StrokeShape>
+            <Grid>
+                <lvc:CartesianChart/>
+            </Grid>
         </Border>
 
         <CollectionView
@@ -41,24 +43,35 @@
                         HeightRequest="50"
                         WidthRequest="{Binding Source={x:Reference CollectionPlayerCards}, Path=Width}"
                         Padding="20, 0"
-                        BackgroundColor="Yellow">
-                        <HorizontalStackLayout>
-                            <Label 
-                                Text="{Binding Name}"
-                                HorizontalOptions="Start"
-                                VerticalOptions="Center"
-                                FontSize="20"
-                                Padding="0, 0, 50, 0"/>
+                        Stroke="{StaticResource Primary}"
+                        Margin="5">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                        <Grid
+                            ColumnDefinitions="*, *">
+                            <HorizontalStackLayout>
+                                <Label 
+                                    Text="{Binding Name}"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center"
+                                    FontSize="20"
+                                    Padding="0, 0, 50, 0"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout
+                                Grid.Column="1"
+                                HorizontalOptions="End">
 
-                            <Label 
-                                Text="{Binding MoneyLeft}"
-                                VerticalOptions="Center"
-                                FontSize="20"/>
-                            <Label 
-                                Text=" DKK"
-                                VerticalOptions="Center"
-                                FontSize="20"/>
-                        </HorizontalStackLayout>
+                                <Label 
+                                    Text="{Binding MoneyLeft}"
+                                    VerticalOptions="Center"
+                                    FontSize="20"/>
+                                <Label 
+                                    Text=" DKK"
+                                    VerticalOptions="Center"
+                                    FontSize="20"/>
+                            </HorizontalStackLayout>
+                        </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -74,11 +87,13 @@
         
         <Button
             x:Name="BtnQuit"
+            Style="{StaticResource ButtonPrimary}"
             Text="Loading Option"
             Clicked="BtnQuitClicked"/>
         
         <Button
             x:Name="BtnReturn"
+            Style="{StaticResource ButtonSecondary}"
             Text="Return"
             Clicked="BtnReturnClicked"/>
 
